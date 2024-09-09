@@ -1,30 +1,41 @@
 document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault(); 
+    event.preventDefault();
 
-    // Move logo to center
-    document.querySelector('.logo').classList.add('centered');
-
-    // Hide form and photo
-    document.querySelector('.form-container').classList.add('hide');
-    document.querySelector('.photo').classList.add('hide');
-
-    // Show and animate the new photo container
+    
+    const logo = document.querySelector('.logo');
+    const formContainer = document.querySelector('.form-container');
+    const photo = document.querySelector('.photo');
+    const customerSection = document.querySelector('.customer');
+    const enrollButton = document.querySelector('.enroll');
     const photoExpandContainer = document.querySelector('.photo-expand-container');
+
+    
+    logo.classList.add('centered');
+    formContainer.classList.add('hide');
+    photo.classList.add('hide');
+    customerSection.style.visibility = 'hidden';
+    enrollButton.style.visibility = 'hidden';
+    
+    
     photoExpandContainer.classList.add('show');
 
-    // Wait for the photo container animation to finish, then handle showing the rest
+    
     setTimeout(() => {
-        // Reset the logo
-        document.querySelector('.logo').classList.add('reset');
+        
+        logo.classList.remove('centered');
+        logo.classList.add('reset');
 
-        // Show the form and photo again
-        document.querySelector('.form-container').classList.remove('hide');
-        document.querySelector('.form-container').style.display = 'block';
-        document.querySelector('.photo').classList.remove('hide');
-        document.querySelector('.photo').style.display = 'flex'; // Adjust based on your layout
+        
+        formContainer.classList.remove('hide');
+        formContainer.style.display = 'block';
+        photo.classList.remove('hide');
+        photo.style.display = 'flex';
 
-        // Show customer container and enroll button
-        document.querySelector('.customer').style.display = 'flex'; // Adjust display property
-        document.querySelector('.enroll').style.display = 'inline-block'; // Adjust display property
-    }, 6000); // Ensure this matches the duration of the animations
+        
+        customerSection.style.visibility = 'visible';
+        enrollButton.style.visibility = 'visible';
+
+        
+        photoExpandContainer.classList.remove('show');
+    }, 7000); 
 });
