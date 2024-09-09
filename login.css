@@ -81,9 +81,54 @@ display:flex;
  
     height: calc(100vh - 40px); 
     width: 100%;
-    
+
+
+    background-color: transparent;
+    transition: background-color 1s ease;
 
 }
+/* Logo centered animation */
+@keyframes moveLogoToCenter {
+  0% {
+      transform: translate(0, 0); /* Original position */
+  }
+  100% {
+      transform: translate(calc(50vw - 50%), calc(50vh - 50%)); /* Center of the screen */
+  }
+}
+
+/* Hide form and photo */
+@keyframes hideContent {
+  0% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+  }
+}
+
+/* Make photo container invisible */
+.photo img {
+  transition: opacity 1s ease;
+}
+
+/* Completebox background white */
+.completebox.white-background {
+  background-color: white;
+}
+
+/* Center logo */
+.logo.centered {
+  animation: moveLogoToCenter 1s forwards;
+}
+
+/* Hide form and photo */
+.form-container.hide, .photo.hide {
+  animation: hideContent 1s forwards;
+  display: none;}
+
+
+
 
 .login {
     
@@ -109,6 +154,9 @@ display:flex;
   /* margin-left: 300px;
   margin-top: 0; */
 }
+
+
+
 .secondnar{
   display: flex;
   justify-content: space-between;
@@ -259,22 +307,6 @@ display:flex;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .photo {
     
     display: flex;
@@ -292,5 +324,112 @@ display:flex;
     border: 15px ;   
     
     border-radius: 15px; 
-    
+}
+/* Logo centered animation */
+@keyframes moveLogoToCenter {
+  0% {
+      transform: translate(0, 0); /* Original position */
+  }
+  100% {
+      transform: translate(calc(50vw - 50%), calc(50vh - 50%)); /* Center of the screen */
+  }
+}
+
+@keyframes moveLogoBack {
+  0% {
+      transform: translate(calc(50vw - 50%), calc(50vh - 50%)); /* Center position */
+  }
+  100% {
+      transform: translate(0, 0); /* Original position */
+  }
+}
+
+/* Hide customer and enroll button when logo is centered */
+.logo.centered ~ .customer,
+.logo.centered ~ .enroll {
+  animation: hideContent 1s forwards;
+  display: none; /* Hide immediately after animation starts */
+}
+
+/* Hide form and photo */
+@keyframes hideContent {
+  0% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+  }
+}
+
+.photo-expand-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: calc(100vh - 40px); 
+  width: 100%;
+  transform: translate(-50%, -50%); /* Center the container */
+  display: none; /* Initially hidden */
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0); /* Transparent background */
+  z-index: 15; /* Ensure it's above the logo */
+  border-radius: 20px; /* Border radius for the container */
+  
+  padding-top: 30px;
+  padding-bottom: 0%;
+  box-sizing: border-box; /* Ensure padding is included in width/height */
+}
+
+/* Combined animation to expand, pause, and slide the container */
+@keyframes expandPauseAndSlide {
+  0% {
+    transform: translate(-50%, -50%) scale(0); /* Start scaled down and centered */
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1); /* Expand to full size */
+    opacity: 1;
+  }
+  75% {
+    /* Maintain expanded state */
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) translateX(100%); /* Slide out to the right */
+    opacity: 0;
+  }
+}
+
+
+/* Apply the combined animation with a delay */
+.photo-expand-container.show {
+  display: flex; /* Show the container */
+  animation: expandPauseAndSlide 6s forwards; /* Slow down the animation */
+  animation-delay: 0s; /* Start the animation immediately */
+}
+.logo.centered {
+  animation: moveLogoToCenter 1s forwards;
+}
+
+.logo.reset {
+  animation: moveLogoBack 1s forwards;
+}
+
+.logo {
+  position: relative;
+  z-index: 20; /* Ensure the logo is below the photo container */
+}
+
+.photo-expand-container img {
+  width: 100%; /* Cover the container */
+  height: 100%; /* Cover the container */
+  object-fit: cover; /* Maintain aspect ratio */
+  border-radius: 15px; /* Border radius for the image */
+}
+
+/* Hide form and photo */
+.form-container.hide, .photo.hide {
+  animation: hideContent 1s forwards;
+  display: none; /* Hide immediately after animation starts */
 }
